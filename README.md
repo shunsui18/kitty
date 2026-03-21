@@ -4,7 +4,7 @@
 
 # 夜桜 Yozakura — kitty Theme
 
-A handcrafted pastel color palette for [kitty terminal](https://sw.kovidgoyal.net/kitty/), based on the [Yozakura](https://shunsui18.github.io/yozakura) palette.
+A handcrafted pastel color palette for [kitty terminal](https://sw.kovidgoyal.net/kitty/), based on the [Yozakura](https://github.com/shunsui18/yozakura) palette.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-pink?style=flat-square)](LICENSE)
 [![kitty](https://img.shields.io/badge/kitty-0.28+-lavender?style=flat-square)](https://sw.kovidgoyal.net/kitty/)
@@ -19,7 +19,7 @@ A handcrafted pastel color palette for [kitty terminal](https://sw.kovidgoyal.ne
 
 | | Flavor | Description |
 |---|---|---|
-| 🌸 | **Yoru** *(night)* | Deep, moonlit background with soft sakura accents — default |
+| 🌸 | **Yoru** *(night)* | Deep, moonlit background with soft sakura accents |
 | ☀️ | **Hiru** *(day)* | Warm ivory canvas with gentle pastel tones |
 
 <br>
@@ -47,26 +47,29 @@ Install directly from this repository with a single command:
 bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/kitty/main/install.sh)
 ```
 
-> This runs with **Yoru** flavor by default.
+> Running without flags launches an **interactive menu** to pick your flavor.
 
 ---
 
 ### Options
 
-| Flag | Values | Default | Description |
-|---|---|---|---|
-| `--theme` | `yoru` \| `hiru` | `yoru` | Which flavor to activate |
-| `-h`, `--help` | — | — | Show help and list available flavors |
+| Flag | Values | Description |
+|---|---|---|
+| `--theme` | `yoru` \| `hiru` | Skip the menu and activate a specific flavor directly |
+| `-h`, `--help` | — | Show help and list available flavors |
 
 ---
 
 ### Examples
 
 ```bash
-# Yoru (night)
+# interactive menu
+bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/kitty/main/install.sh)
+
+# skip menu — yoru (night)
 bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/kitty/main/install.sh) --theme yoru
 
-# Hiru (day)
+# skip menu — hiru (day)
 bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/kitty/main/install.sh) --theme hiru
 ```
 
@@ -80,7 +83,10 @@ If you prefer to install by hand:
 # 1. Clone the repo
 git clone https://github.com/shunsui18/kitty.git && cd kitty
 
-# 2. Run the installer
+# 2a. Interactive menu
+bash install.sh
+
+# 2b. Or pass a flavor directly
 bash install.sh --theme yoru
 ```
 
@@ -89,14 +95,15 @@ bash install.sh --theme yoru
 ## ✦ What the Installer Does
 
 1. **Self-locates** — resolves its own path regardless of where it is called from
-2. **Validates** — confirms the requested theme file exists before touching anything
-3. **Copies** all `yozakura-*.conf` files into `$HOME/.config/kitty/`, creating the directory if needed
-4. **Patches** `$HOME/.config/kitty/kitty.conf`:
+2. **Prompts** — shows an interactive flavor menu if no `--theme` flag is given; accepts a number or flavor name
+3. **Validates** — confirms the requested theme file exists before touching anything
+4. **Copies** all `yozakura-*.conf` files into `$HOME/.config/kitty/`, creating the directory if needed
+5. **Patches** `$HOME/.config/kitty/kitty.conf`:
    - Replaces any existing `include *.conf` line with `include yozakura-<flavor>.conf`
    - Appends the include line if none is present in the config
    - Creates `kitty.conf` from scratch if it does not exist yet
    - Comments out any inline colour properties (e.g. `foreground`, `background`, `color0`–`color15`) already present in the config so the theme file takes full control — all other settings are left untouched
-5. **Fails gracefully** — descriptive error messages if arguments are wrong or a theme file is not found
+6. **Fails gracefully** — descriptive error messages if arguments are wrong or a theme file is not found
 
 ---
 
