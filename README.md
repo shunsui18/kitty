@@ -4,7 +4,7 @@
 
 # 夜桜 Yozakura — kitty Theme
 
-A handcrafted pastel color palette for [kitty terminal](https://sw.kovidgoyal.net/kitty/), based on the [Yozakura](https://github.com/shunsui18/yozakura) palette.
+A handcrafted pastel color palette for [kitty terminal](https://sw.kovidgoyal.net/kitty/), based on the [Yozakura](https://shunsui18.github.io/yozakura) palette.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-pink?style=flat-square)](LICENSE)
 [![kitty](https://img.shields.io/badge/kitty-0.28+-lavender?style=flat-square)](https://sw.kovidgoyal.net/kitty/)
