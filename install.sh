@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # ╔══════════════════════════════════════════════════════════════╗
-# ║   yozakura — kitty colour theme installer                   ║
-# ║   Usage: bash install.sh [--theme <flavor>]                 ║
-# ║          bash install.sh          (interactive menu)        ║
+# ║   yozakura — kitty colour theme installer                    ║
+# ║   Usage: bash install.sh [--theme <flavor>]                  ║
+# ║          bash install.sh          (interactive menu)         ║
 # ╚══════════════════════════════════════════════════════════════╝
 set -euo pipefail
 
@@ -83,8 +83,8 @@ if [[ -z "$FLAVOR" ]]; then
 
   echo -e "" >&2
   echo -e "  ${PINK}╭────────────────────────────────────────╮${RESET}" >&2
-  echo -e "  ${PINK}│${RESET}   ${BOLD}${PINK}🌸  夜桜  ·  yozakura  ·  kitty${RESET}   ${PINK}│${RESET}" >&2
-  echo -e "  ${PINK}│${RESET}        ${DIM}choose a flavor to install${RESET}       ${PINK}│${RESET}" >&2
+  echo -e "  ${PINK}│${RESET}   ${BOLD}${PINK}🌸  夜桜  ·  yozakura  ·  kitty${RESET}     ${PINK}│${RESET}" >&2
+  echo -e "  ${PINK}│${RESET}        ${DIM}choose a flavor to install${RESET}      ${PINK}│${RESET}" >&2
   echo -e "  ${PINK}╰────────────────────────────────────────╯${RESET}" >&2
   echo -e "" >&2
 
@@ -94,11 +94,8 @@ if [[ -z "$FLAVOR" ]]; then
     tag="${FLAVOR_TAG[$label]:-}"
     desc="${FLAVOR_DESC[$label]:-}"
     col="${FLAVOR_COLOR[$label]:-$RESET}"
-
-    echo -e "  ${DIM}┌─────────────────────────────────────────┐${RESET}" >&2
-    echo -e "  ${DIM}│${RESET}  ${BOLD}${col}$((i+1))  ${icon}  ${label}${RESET}  ${DIM}(${tag})${RESET}" >&2
-    echo -e "  ${DIM}│${RESET}     ${DIM}${desc}${RESET}" >&2
-    echo -e "  ${DIM}└─────────────────────────────────────────┘${RESET}" >&2
+    echo -e "    ${BOLD}${col}$((i+1))  ${icon}  ${label}${RESET}  ${DIM}(${tag})${RESET}" >&2
+    echo -e "      ${DIM}${desc}${RESET}" >&2
     echo "" >&2
   done
 
