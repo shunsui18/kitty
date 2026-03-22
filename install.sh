@@ -24,8 +24,24 @@ warn()    { echo -e "${YELLOW}  ⚠${RESET}  $*"     >&2; }
 die()     { echo -e "${RED}  ✗  $*${RESET}"        >&2; exit 1; }
 section() { echo -e "\n${BOLD}${MAGENTA}$*${RESET}" >&2; }
 
-# ── Resolve repo root (wherever this script lives) ───────────────────────────
+# ── GitHub raw base URL ───────────────────────────────────────────────────────
+GITHUB_RAW="https://raw.githubusercontent.com/shunsui18/kitty/main"
+
+# ── Detect remote vs local execution ─────────────────────────────────────────
+# When piped via bash <(curl ...), BASH_SOURCE[0] is a /proc/self/fd/* path.
+# In that case we download theme files to a temp dir instead of reading locally.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REMOTE=0
+if [[ "$SCRIPT_DIR" == /proc/* || "$SCRIPT_DIR" == /dev/fd* ]]; then
+  REMOTE=1
+  SCRIPT_DIR="$(mktemp -d)"
+  trap 'rm -rf "$SCRIPT_DIR"' EXIT
+  info "Remote install detected — fetching theme files from GitHub..." >&2
+  for flavor in yoru hiru; do
+    dest="${SCRIPT_DIR}/yozakura-${flavor}.conf"
+    curl -fsSL "${GITHUB_RAW}/yozakura-${flavor}.conf" -o "$dest"       || die "Failed to download yozakura-${flavor}.conf from GitHub"
+  done
+fi
 
 # ── Build flavor list from available theme files ──────────────────────────────
 mapfile -t FLAVORS < <(
@@ -67,8 +83,8 @@ if [[ -z "$FLAVOR" ]]; then
 
   echo -e "" >&2
   echo -e "  ${PINK}╭────────────────────────────────────────╮${RESET}" >&2
-  echo -e "  ${PINK}│${RESET}   ${BOLD}${PINK}🌸  夜桜  ·  yozakura  ·  kitty${RESET}      ${PINK}│${RESET}" >&2
-  echo -e "  ${PINK}│${RESET}        ${DIM}choose a flavor to install${RESET}      ${PINK}│${RESET}" >&2
+  echo -e "  ${PINK}│${RESET}   ${BOLD}${PINK}🌸  夜桜  ·  yozakura  ·  kitty${RESET}   ${PINK}│${RESET}" >&2
+  echo -e "  ${PINK}│${RESET}        ${DIM}choose a flavor to install${RESET}       ${PINK}│${RESET}" >&2
   echo -e "  ${PINK}╰────────────────────────────────────────╯${RESET}" >&2
   echo -e "" >&2
 
@@ -79,8 +95,10 @@ if [[ -z "$FLAVOR" ]]; then
     desc="${FLAVOR_DESC[$label]:-}"
     col="${FLAVOR_COLOR[$label]:-$RESET}"
 
-    echo -e "  ${DIM}${RESET}  ${BOLD}${col}$((i+1))  ${icon}  ${label}${RESET}  ${DIM}(${tag})${RESET}" >&2
-    echo -e "  ${DIM}${RESET}     ${DIM}${desc}${RESET}" >&2
+    echo -e "  ${DIM}┌─────────────────────────────────────────┐${RESET}" >&2
+    echo -e "  ${DIM}│${RESET}  ${BOLD}${col}$((i+1))  ${icon}  ${label}${RESET}  ${DIM}(${tag})${RESET}" >&2
+    echo -e "  ${DIM}│${RESET}     ${DIM}${desc}${RESET}" >&2
+    echo -e "  ${DIM}└─────────────────────────────────────────┘${RESET}" >&2
     echo "" >&2
   done
 
