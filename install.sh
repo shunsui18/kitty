@@ -36,7 +36,7 @@ if [[ "$SCRIPT_DIR" == /proc/* || "$SCRIPT_DIR" == /dev/fd* ]]; then
   REMOTE=1
   SCRIPT_DIR="$(mktemp -d)"
   trap 'rm -rf "$SCRIPT_DIR"' EXIT
-  info "Remote install detected — fetching theme files from GitHub..." >&2
+  #info "Remote install detected — fetching theme files from GitHub..." >&2
   for flavor in yoru hiru; do
     dest="${SCRIPT_DIR}/yozakura-${flavor}.conf"
     curl -fsSL "${GITHUB_RAW}/yozakura-${flavor}.conf" -o "$dest"       || die "Failed to download yozakura-${flavor}.conf from GitHub"
@@ -83,7 +83,7 @@ if [[ -z "$FLAVOR" ]]; then
 
   echo -e "" >&2
   echo -e "  ${PINK}╭────────────────────────────────────────╮${RESET}" >&2
-  echo -e "  ${PINK}│${RESET}   ${BOLD}${PINK}🌸  夜桜  ·  yozakura  ·  kitty${RESET}     ${PINK}│${RESET}" >&2
+  echo -e "  ${PINK}│${RESET}   ${BOLD}${PINK}🌸  夜桜  ·  yozakura  ·  kitty${RESET}      ${PINK}│${RESET}" >&2
   echo -e "  ${PINK}│${RESET}        ${DIM}choose a flavor to install${RESET}      ${PINK}│${RESET}" >&2
   echo -e "  ${PINK}╰────────────────────────────────────────╯${RESET}" >&2
   echo -e "" >&2
