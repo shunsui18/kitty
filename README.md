@@ -1,5 +1,4 @@
 <div align="center">
-
 <img src="https://raw.githubusercontent.com/shunsui18/yozakura/refs/heads/main/resources/icons/icon-animated.svg" alt="Yozakura" width="100"/>
 
 # 夜桜 Yozakura — kitty Theme
@@ -44,7 +43,7 @@ A handcrafted pastel color palette for [kitty terminal](https://sw.kovidgoyal.ne
 Install directly from this repository with a single command:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/kitty/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/yozakura-kitty/main/install.sh)
 ```
 
 > Running without flags launches an **interactive menu** to pick your flavor.
@@ -64,13 +63,13 @@ bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/kitty/main/install
 
 ```bash
 # interactive menu
-bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/kitty/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/yozakura-kitty/main/install.sh)
 
 # skip menu — yoru (night)
-bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/kitty/main/install.sh) --theme yoru
+bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/yozakura-kitty/main/install.sh) --theme yoru
 
 # skip menu — hiru (day)
-bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/kitty/main/install.sh) --theme hiru
+bash <(curl -fsSL https://raw.githubusercontent.com/shunsui18/yozakura-kitty/main/install.sh) --theme hiru
 ```
 
 ---
@@ -81,7 +80,7 @@ If you prefer to install by hand:
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/shunsui18/kitty.git && cd kitty
+git clone https://github.com/shunsui18/yozakura-kitty.git && cd yozakura-kitty
 
 # 2a. Interactive menu
 bash install.sh
@@ -110,7 +109,7 @@ bash install.sh --theme yoru
 ## ✦ File Structure
 
 ```
-kitty/
+yozakura-kitty/
 ├── assets/
 │   ├── yozakura-yoru-kitty-preview.png
 │   └── yozakura-hiru-kitty-preview.png
